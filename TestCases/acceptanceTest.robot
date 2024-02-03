@@ -122,7 +122,7 @@ Cancel Deletion of User Account
 Login
     [Arguments]    ${username}    ${password}
     Open Browser    ${URL}    ${Broswer}
-    Maximize Browser Window
+    #Maximize Browser Window
     Wait Until Element Is Visible    id=loginForm    timeout=2
     Input Text    ${username_textbox}    ${username}
     Input Password    ${pwd_textbox}    ${password}
