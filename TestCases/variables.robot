@@ -12,5 +12,5 @@ ${pwd_textbox}    id=login_password
 ${signup_username}    luke
 ${signup_password}    LUKEEE
 ${modifiedUser}    modifiedUser
-${invalid_admin_username}    invaliduser
-${invalid_admin_password}    invalidpassword
+${invalid_username}    invaliduser
+${invalid_password}    invalidpassword

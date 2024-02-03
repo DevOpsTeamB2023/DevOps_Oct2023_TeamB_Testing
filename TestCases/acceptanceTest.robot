@@ -2,6 +2,7 @@
 Library    SeleniumLibrary
 Library    XML
 Library    Collections
+Library    String
 Resource    variables.robot
 
 *** Test Cases ***
@@ -10,15 +11,15 @@ Resource    variables.robot
 Administrator Login with valid Credentials
 
     Login    ${ValidAdminUserName}    ${ValidAdminPwd}
-    Wait Until Page Contains    User Details Page    #to wait for the page title to load
+    Wait Until Page Contains    User Details Page    timeout=2    #to wait for the page title to load
     [Teardown]    Close Browser
 
 
 Sign up
     Open Browser    ${URL}    ${Broswer}
-    Wait Until Element Is Visible    id=loginForm
+    Wait Until Element Is Visible    id=loginForm    timeout=2
     Click Button    id=nav-signup-tab
-    Wait Until Element Is Visible    id=signupForm
+    Wait Until Element Is Visible    id=signupForm    timeout=2
     Input Text    id=signup_username    ${signup_username}
     Input Password    id=signup_password    ${signup_password}
     Click Button    id=signup_button
@@ -36,7 +37,7 @@ Normal user login with valid Credentials
 
 Delete User Account 
     Login    ${ValidAdminUserName}    ${ValidAdminPwd}
-    Wait Until Element Is Visible    class=table
+    Wait Until Element Is Visible    class=table    timeout=2
     #Get the last delete button
     ${delete_button}=    Get WebElements    xpath://button[contains(text(), 'delete')]
     ${delete_button}=    Set Variable    ${delete_button[-1]}
@@ -54,7 +55,7 @@ Delete User Account
 
 Modify User Account
     Login    ${ValidAdminUserName}    ${ValidAdminPwd}
-    Wait Until Element Is Visible    class=table
+    Wait Until Element Is Visible    class=table    timeout=2
     #find the last modify button
     ${modify_button}=    Get WebElements    xpath://button[contains(text(), 'modify')]
     ${modify_button}=    Set Variable    ${modify_button[-1]}
@@ -64,11 +65,11 @@ Modify User Account
     Click Element    ${modify_button}
     Page Should Contain    Update    #change to title should be
     #input text for modification 
-    Wait Until Element Is Visible    id=modifyForm
+    Wait Until Element Is Visible    id=modifyForm    timeout=2
     Input Text    id=modify_username    ${modifiedUser}
     Click Button    id=update_user_button
     #get the current ID and the username
-    Wait Until Element Is Visible    class=table
+    Wait Until Element Is Visible    class=table    timeout=2
     ${cur_value}=    Get Table Cell    class=table    -1    1
     ${cur_name}=    Get Table Cell    class=table    -1    2
     Log    ${cur_value}
@@ -82,7 +83,7 @@ Modify User Account
 
 Approve User Accounts
     Login    ${ValidAdminUserName}    ${ValidAdminPwd}
-    Wait Until Element Is Visible    class=table
+    Wait Until Element Is Visible    class=table    timeout=2
     #find last appprove button
     ${approve_button}=    Get WebElements    xpath=//button[contains(text(), 'approve')]
     ${approve_button}=    Set Variable    ${approve_button[-1]}
@@ -92,15 +93,16 @@ Approve User Accounts
 
 
 #failing test cases
-Administrator login with invalid Credentials
-    Login    ${invalid_admin_username}    ${invalid_admin_password}
+Login with invalid Credentials
+    Login    ${invalid_username}    ${invalid_password}
     Should Contain    id=error-message    Invalid Credentials
     [Teardown]    Close Browser
 
 
+
 Cancel Deletion of User Account
     Login    ${ValidAdminUserName}    ${ValidAdminPwd}
-    Wait Until Element Is Visible    class=table
+    Wait Until Element Is Visible    class=table    timeout=2
     #Get the last delete button
     ${delete_button}=    Get WebElements    xpath://button[contains(text(), 'delete')]
     ${delete_button}=    Set Variable    ${delete_button[-1]}
@@ -120,8 +122,8 @@ Cancel Deletion of User Account
 Login
     [Arguments]    ${username}    ${password}
     Open Browser    ${URL}    ${Broswer}
-    Maximize Browser Window
-    Wait Until Element Is Visible    id=loginForm
+    #Maximize Browser Window
+    Wait Until Element Is Visible    id=loginForm    timeout=2
     Input Text    ${username_textbox}    ${username}
     Input Password    ${pwd_textbox}    ${password}
     Click Button    ${login_button}   
