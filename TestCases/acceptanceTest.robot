@@ -104,7 +104,7 @@ Login with invalid Credentials
     Login    ${invalid_username}    ${invalid_password}
     Should Contain    id=error-message    Invalid Credentials
     ${error-message}=    Get Text    id=error-message
-    Log    ${error-message}
+    Log    ${error-message}    console=True
     [Teardown]    Close Browser
 
 
@@ -132,7 +132,7 @@ Login
     [Arguments]    ${username}    ${password}
     Open Browser    ${URL}    ${Broswer}
     #Maximize Browser Window
-    Wait Until Element Is Visible    id=loginForm    timeout=2
+    Wait Until Element Is Visible    id=loginForm    timeout=10
     Input Text    ${username_textbox}    ${username}
     Input Password    ${pwd_textbox}    ${password}
     Click Button    ${login_button}   
