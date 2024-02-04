@@ -103,9 +103,9 @@ Approve User Accounts
 Login with invalid Credentials
     Login    ${invalid_username}    ${invalid_password}
     Wait Until Element Is Visible    id=error-message
-    Should Contain    id=error-message    An error occurred. Please try again later.
-    ${error-message}=    Get Text    id=error-message
-    Log    ${error-message}    console=True
+    ${error-message}=    Get Text    id=error-message    
+    Should Be Equal As Strings    ${error-message}    An error occurred. Please try again later.
+    Log    ${error-message}    
     [Teardown]    Close Browser
 
 
