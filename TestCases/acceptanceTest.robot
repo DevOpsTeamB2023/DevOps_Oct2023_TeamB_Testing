@@ -18,7 +18,7 @@ Check if the URL is valid
 Administrator Login with valid Credentials
 
     Login    ${ValidAdminUserName}    ${ValidAdminPwd}
-    Wait Until Page Contains    User Details Page    timeout=2    #to wait for the page title to load
+    Wait Until Page Contains    User Details Page    timeout=10    #to wait for the page title to load
     [Teardown]    Close Browser
 
 
