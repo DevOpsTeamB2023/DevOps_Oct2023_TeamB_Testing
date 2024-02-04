@@ -102,7 +102,7 @@ Approve User Accounts
 #failing test cases
 Login with invalid Credentials
     Login    ${invalid_username}    ${invalid_password}
-    Wait Until Element Is Visible    error-message
+    Wait Until Element Is Visible    id=error-message
     Should Contain    id=error-message    An error occurred. Please try again later.
     ${error-message}=    Get Text    id=error-message
     Log    ${error-message}    console=True
