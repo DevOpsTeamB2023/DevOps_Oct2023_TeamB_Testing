@@ -3,11 +3,18 @@ Library    SeleniumLibrary
 Library    XML
 Library    Collections
 Library    String
+Library    OperatingSystem
 Resource    variables.robot
 
 *** Test Cases ***
 
 #passing test cases
+
+Check if the URL is valid 
+    Open Browser    ${URL}    ${Broswer}
+    Title Should Be    Sign up and Login Page
+    [Teardown]    Close Browser
+
 Administrator Login with valid Credentials
 
     Login    ${ValidAdminUserName}    ${ValidAdminPwd}
