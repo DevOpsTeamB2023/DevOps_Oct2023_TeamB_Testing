@@ -103,6 +103,8 @@ Approve User Accounts
 Login with invalid Credentials
     Login    ${invalid_username}    ${invalid_password}
     Should Contain    id=error-message    Invalid Credentials
+    ${error-message}=    Get Text    id=error-message
+    Log    ${error-message}
     [Teardown]    Close Browser
 
 
