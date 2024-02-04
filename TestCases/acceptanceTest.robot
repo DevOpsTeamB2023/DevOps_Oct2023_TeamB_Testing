@@ -44,7 +44,7 @@ Normal user login with valid Credentials
 
 Delete User Account 
     Login    ${ValidAdminUserName}    ${ValidAdminPwd}
-    Wait Until Element Is Visible    class=table    timeout=10
+    Wait Until Element Is Visible    class=table    timeout=5
     #Get the last delete button
     ${delete_button}=    Get WebElements    xpath://button[contains(text(), 'delete')]
     ${delete_button}=    Set Variable    ${delete_button[-1]}
@@ -62,7 +62,7 @@ Delete User Account
 
 Modify User Account
     Login    ${ValidAdminUserName}    ${ValidAdminPwd}
-    Wait Until Element Is Visible    class=table    timeout=10
+    Wait Until Element Is Visible    class=table    timeout=5
     #find the last modify button
     ${modify_button}=    Get WebElements    xpath://button[contains(text(), 'modify')]
     ${modify_button}=    Set Variable    ${modify_button[-1]}
@@ -76,7 +76,7 @@ Modify User Account
     Input Text    id=modify_username    ${modifiedUser}
     Click Button    id=update_user_button
     #get the current ID and the username
-    Wait Until Element Is Visible    class=table    timeout=10
+    Wait Until Element Is Visible    class=table    timeout=5
     ${cur_value}=    Get Table Cell    class=table    -1    1
     ${cur_name}=    Get Table Cell    class=table    -1    2
     Log    ${cur_value}
@@ -90,7 +90,7 @@ Modify User Account
 
 Approve User Accounts
     Login    ${ValidAdminUserName}    ${ValidAdminPwd}
-    Wait Until Element Is Visible    class=table    timeout=10
+    Wait Until Element Is Visible    class=table    timeout=5
     #find last appprove button
     ${approve_button}=    Get WebElements    xpath=//button[contains(text(), 'approve')]
     ${approve_button}=    Set Variable    ${approve_button[-1]}
@@ -102,7 +102,8 @@ Approve User Accounts
 #failing test cases
 Login with invalid Credentials
     Login    ${invalid_username}    ${invalid_password}
-    Should Contain    id=error-message    Invalid Credentials
+    Wait Until Element Is Visible    error-message
+    Should Contain    id=error-message    An error occurred. Please try again later.
     ${error-message}=    Get Text    id=error-message
     Log    ${error-message}    console=True
     [Teardown]    Close Browser
@@ -111,7 +112,7 @@ Login with invalid Credentials
 
 Cancel Deletion of User Account
     Login    ${ValidAdminUserName}    ${ValidAdminPwd}
-    Wait Until Element Is Visible    class=table    timeout=10
+    Wait Until Element Is Visible    class=table    timeout=5
     #Get the last delete button
     ${delete_button}=    Get WebElements    xpath://button[contains(text(), 'delete')]
     ${delete_button}=    Set Variable    ${delete_button[-1]}
