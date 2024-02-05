@@ -12,7 +12,7 @@ Resource    variables.robot
 
 Check if the URL is valid 
     Open Browser    ${URL}    ${Broswer}
-    Title Should Be    Sign up and Login Page
+    Title Should Be    Shaniah
     [Teardown]    Close Browser
 
 Administrator Login with valid Credentials
