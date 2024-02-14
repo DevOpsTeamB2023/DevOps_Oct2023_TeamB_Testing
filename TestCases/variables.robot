@@ -1,5 +1,5 @@
 *** Variables ***
-${URL}    https://devopsteamb2023.github.io/DevOps_Oct2023_TeamB_Assignment/    #this might have to change
+${URL}    https://devopsteamb2023.github.io/DevOps_Oct2023_TeamB_Assignment/    
 ${Broswer}    Chrome
 ${Login_form}    id=loginForm
 ${ValidAdminUserName}    Shaniah
