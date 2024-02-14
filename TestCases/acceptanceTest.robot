@@ -70,7 +70,6 @@ Modify User Account
     #get the value of the ID before modifying and click on modify
     ${prev_value}=    Get Table Cell    class=table    -1    1
     Click Element    ${modify_button}
-    Page Should Contain    Update    #change to title should be
     #input text for modification 
     Wait Until Element Is Visible    id=modifyForm    timeout=2
     Input Text    id=modify_username    ${modifiedUser}
@@ -127,6 +126,11 @@ Cancel Deletion of User Account
     Should Be Equal As Strings    ${prev_value}    ${cur_value}
     [Teardown]    Close Browser
 
+Create Capstone Entry As Administrator
+    Login    ${ValidAdminUserName}    ${ValidAdminPwd}
+    ${record_button}=    Get WebElement    xpath://button[contains(text(), 'delete')]
+    Click Element    ${record_button}
+    
 
 *** Keywords ***
 Login
