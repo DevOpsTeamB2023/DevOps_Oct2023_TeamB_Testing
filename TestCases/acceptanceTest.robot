@@ -98,6 +98,36 @@ Approve User Accounts
     [Teardown]    Close Browser
 
 
+Create Capstone Entry As Administrator
+    Login    ${ValidAdminUserName}    ${ValidAdminPwd}
+    ${create_button}=    Get WebElement    xpath://button[contains(text(), 'create Capstone')]
+    Click Element    ${create_button}
+    Input Text    xpath://label[text()='Name']/following-sibling::input    Luke
+    Input Text    xpath://label[text()='Capstone Title']/following-sibling::input    TSAO
+    Select Radio BUtton    radiooptions    Staff
+    Input Text    xpath://label[text()='No. Of Students']/following-sibling::input    4
+    Input Text    xpath://label[text()='Name of Company']/following-sibling::input    KKK Company
+    Input Text    xpath://label[text()='Academic Year']/following-sibling::input    2023/24
+    Input Text    xpath://label[text()='Company Point of Contact']/following-sibling::input    Tan BB
+    Input Text    xpath://label[text()='Brief Description']/following-sibling::input    Write Here
+    Click Element    xpath://button[contains(text(), 'Save')]
+    ${alert}=    Handle Alert
+    Should contain    ${alert}    Capstone record created.
+    [Teardown]    Close Browser
+
+
+Query Capstone Entry As Administrator
+    Login    ${ValidAdminUserName}    ${ValidAdminPwd}
+    ${query_button}=    Get WebElement    xpath://button[contains(text(), 'Query')]
+    Click Element    ${query_button}
+    Title Should be    Query Capstone Data
+    Input Text    xpath://label[text()='By Academic Year']/following-sibling::input    AY2024
+    Input Text    xpath://label[text()='By Keyword']/following-sibling::input    Quantum
+    Click Element    xpath://button[contains(text(), 'Search')]
+    Title Should Be    Query Result Listing
+    [Teardown]    Close Browser
+
+
 #failing test cases
 Login with invalid Credentials
     Login    ${invalid_username}    ${invalid_password}
@@ -126,11 +156,27 @@ Cancel Deletion of User Account
     Should Be Equal As Strings    ${prev_value}    ${cur_value}
     [Teardown]    Close Browser
 
-Create Capstone Entry As Administrator
+
+Cancel Create Capstone Entry As Administrator
     Login    ${ValidAdminUserName}    ${ValidAdminPwd}
-    ${record_button}=    Get WebElement    xpath://button[contains(text(), 'delete')]
+    ${record_button}=    Get WebElement    xpath://button[contains(text(), 'create Capstone')]
     Click Element    ${record_button}
-    
+    Click Element    xpath://label[contains(text(), 'Cancel')]
+    [Teardown]    Close Browser
+
+
+Create Capstone Entry As Administrator with invalid inputs
+    Login    ${ValidAdminUserName}    ${ValidAdminPwd}
+    ${record_button}=    Get WebElement    xpath://button[contains(text(), 'create Capstone')]
+    Click Element    ${record_button}
+    Input Text    xpath://label[text()='Name']/following-sibling::input    Luke121323
+    Input Text    xpath://label[text()='Capstone Title']/following-sibling::input    TSAO
+    Select Radio BUtton    radiooptions    Staff
+    Click Element    xpath://label[contains(text(), 'Save')]
+    ${alert}=    Handle Alert
+    Should contain    ${alert}    Invalid inputs
+    [Teardown]    Close Browser
+
 
 *** Keywords ***
 Login
